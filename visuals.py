@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 
 # load data
-data = pd.read_csv('Individuals.csv')
+data = pd.read_csv('Mixtures.csv')
 
 # histograms and density plots to check distribution shape
 for col in data.columns[1 : -1]:

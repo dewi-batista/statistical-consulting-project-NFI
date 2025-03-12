@@ -23,7 +23,8 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   # if too little data is avaliable then running gamma mixtures does not produce any meaningful value
   # (particulalry when the whole vector is empty )
   if (length(mixture_marker_vector)<5){
-    return(cat("Too little data for mixture ", mixture_names[id_mixture] , " and marker ", markers_names[id_marker] ))
+    return(cat("Too little data for mixture ", mixture_names[id_mixture] , " and marker ", 
+               markers_names[id_marker] ))
     
   }
   
@@ -37,7 +38,7 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   best_BIC = 1e6 # very large BIC 
   
   for(n_components in 1:max_components){
-  
+    print(n_components)
     output = capture.output({
     
       gamma_mixtures_results = gammamixEM(mixture_marker_vector,verb = FALSE,maxit=1e6,k=n_components,epsilon = 1e-08)
@@ -56,19 +57,26 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
     k = 3*n_components # number of paramters to estimate 
     
     current_BIC = k*log(length(mixture_marker_vector)) - 2*gamma_mixtures_results$loglik
-    
+    print(current_BIC)
     if(current_BIC<best_BIC){
       
       best_alpha = gamma_mixtures_results$gamma.pars[1,]
       best_beta = gamma_mixtures_results$gamma.pars[2,]
       best_lambda = gamma_mixtures_results$lambda
+      best_BIC = current_BIC
     }
     
   }
   
   x = seq(min(mixture_marker_vector),max(mixture_marker_vector),1)
   y = dmgamma(x , mgshape =best_alpha , mgscale=best_beta , mgweight = best_lambda)
-  hist(mixture_marker_vector,prob = TRUE,breaks=100)
+  hist(mixture_marker_vector,prob = TRUE,breaks=100,xlab = "Peak Values", main=paste(mixture_names[id_mixture],",",markers_names[id_marker],
+                                                                "\nNumber of components = ", length(best_lambda)))
   lines(x,y)
   return(cat("Optimal number of components is", length(best_lambda) ))
 }
+
+
+
+
+

@@ -11,8 +11,6 @@ markers_names = colnames(data_mixtures)[2:20]
 
 
 gamma_mixtures = function(id_mixture,id_marker,max_components){
-  print(mixture_names[id_mixture])
-  print(markers_names[id_marker])
   
   mixture_marker_vector = data_mixtures[data_mixtures$X==mixture_names[id_mixture],][markers_names[id_marker]]
   # remove NA
@@ -38,7 +36,6 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   best_BIC = 1e6 # very large BIC 
   
   for(n_components in 1:max_components){
-    print(n_components)
     output = capture.output({
     
       gamma_mixtures_results = gammamixEM(mixture_marker_vector,verb = FALSE,maxit=1e6,k=n_components,epsilon = 1e-08)
@@ -57,7 +54,6 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
     k = 3*n_components # number of paramters to estimate 
     
     current_BIC = k*log(length(mixture_marker_vector)) - 2*gamma_mixtures_results$loglik
-    print(current_BIC)
     if(current_BIC<best_BIC){
       
       best_alpha = gamma_mixtures_results$gamma.pars[1,]
@@ -70,11 +66,24 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   
   x = seq(min(mixture_marker_vector),max(mixture_marker_vector),1)
   y = dmgamma(x , mgshape =best_alpha , mgscale=best_beta , mgweight = best_lambda)
-  hist(mixture_marker_vector,prob = TRUE,breaks=100,xlab = "Peak Values", main=paste(mixture_names[id_mixture],",",markers_names[id_marker],
+  new_data = rgamma(100, shape = best_alpha, scale = best_beta)
+  hist(mixture_marker_vector,col=rgb(1,0,0,0.5),prob = TRUE,breaks=100,xlab = "Peak Values", main=paste(mixture_names[id_mixture],",",markers_names[id_marker],
                                                                 "\nNumber of components = ", length(best_lambda)))
-  lines(x,y)
-  return(cat("Optimal number of components is", length(best_lambda) ))
+  hist(new_data,col=rgb(0,0,1,0.5),prob = TRUE,breaks=100,add=T)
+  lines(x,y,col="green",lwd=4)
+  
+  legend("topright", legend=c("True Data","Generated Data","Gamma Mixture function"), col=c(rgb(1,0,0,0.5), 
+                                                        rgb(0,0,1,0.5),"green"), pt.cex=2, pch=15 )
+  
 }
+
+
+
+for(i in 1:length(markers_names)){
+  gamma_mixtures(1,i,10)
+  print("") 
+}
+
 
 
 

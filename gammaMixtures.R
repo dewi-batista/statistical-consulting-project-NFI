@@ -7,7 +7,7 @@ library(evmix)
 
 data_mixtures = read.csv("C:\\Users\\rober\\Documents\\GitHub\\consulting_NFI\\mixtures.csv")
 mixture_names = unique(data_mixtures$X)
-markers_names = colnames(data_mixtures)[2:20]
+markers_names = colnames(data_mixtures)[2:16]
 
 
 gamma_mixtures = function(id_mixture,id_marker,max_components){

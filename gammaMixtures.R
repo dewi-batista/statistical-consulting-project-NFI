@@ -22,7 +22,7 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   # (particulalry when the whole vector is empty )
   if (length(mixture_marker_vector)<5){
     return(cat("Too little data for mixture ", mixture_names[id_mixture] , " and marker ", 
-               markers_names[id_marker] ))
+               markers_names[id_marker],"\n" ))
     
   }
   
@@ -80,7 +80,7 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
 
 
 for(i in 1:length(markers_names)){
-  gamma_mixtures(1,i,10)
+  gamma_mixtures(1,i,3)
   print("") 
 }
 

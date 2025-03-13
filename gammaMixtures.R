@@ -66,7 +66,7 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   
   x = seq(min(mixture_marker_vector),max(mixture_marker_vector),1)
   y = dmgamma(x , mgshape =best_alpha , mgscale=best_beta , mgweight = best_lambda)
-  new_data = rgamma(500, shape = best_alpha, scale = best_beta)
+  new_data = rmgamma(500, mgshape = best_alpha, mgscale = best_beta,mgweight = best_lambda)
   hist(mixture_marker_vector,col=rgb(1,0,0,0.5),prob = TRUE,breaks=100,xlab = "Peak Values", main=paste(mixture_names[id_mixture],",",markers_names[id_marker],
                                                                 "\nNumber of components = ", length(best_lambda)))
   hist(new_data,col=rgb(0,0,1,0.5),prob = TRUE,breaks=100,add=T)

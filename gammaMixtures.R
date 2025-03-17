@@ -83,16 +83,15 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   
   
   ks_test_new_data = ks.test(new_data,mixture_marker_vector_test)
-  print(ks_test_new_data$p.value)
-  
-  return (c(ks_test_new_data$p.value,best_BIC))
+  return(c(ks_test_new_data$p.value,best_BIC))
   
 }
 
 
 
 for(i in 1:length(markers_names)){
-  gamma_mixtures(2,i,5)
+  result = gamma_mixtures(2,i,5)
+  print(result)
 }
 
 

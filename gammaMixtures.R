@@ -4,7 +4,6 @@ library(mixtools)
 library(evmix)
 library(stats)
 set.seed(42) 
-library(ggplot2)
 
 # Get Data and Names of markers and mixtures
 
@@ -74,12 +73,17 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   y = dmgamma(x , mgshape =best_alpha , mgscale=best_beta , mgweight = best_lambda)
   new_data = rmgamma(length(mixture_marker_vector_test), mgshape = best_alpha, mgscale = best_beta,mgweight = best_lambda)
   
-  hist(mixture_marker_vector,col=rgb(1,0,0,0.5),prob = TRUE,breaks=100,xlab = "Peak Values", main=paste(mixture_names[id_mixture],",",markers_names[id_marker],
-                                                                "\nNumber of components = ", length(best_lambda)))
+  par(mar = c(5, 4, 4, 8))
+  
+  hist(mixture_marker_vector,col=rgb(1,0,0,0.5),prob = TRUE,breaks=100,xlab = "Peak Values", 
+       main=paste(mixture_names[id_mixture],",",markers_names[id_marker],"\nNumber of components = ", length(best_lambda)))
+  
   hist(new_data,col=rgb(0,0,1,0.5),prob = TRUE,breaks=100,add=T)
+  
   lines(x,y,col="green",lwd=4)
-  legend("topright",bg="transparent", legend=c("True Data","Generated Data","Gamma Mixture function"), col=c(rgb(1,0,0,0.5), 
-                                                        rgb(0,0,1,0.5),"green"), pt.cex=2, pch=15)
+  
+  legend("topright",xpd = TRUE, inset = c(-0.2, 0),bg = rgb(1, 1, 1, 0), legend=c("True Data","Generated Data","Gamma Mixture function"),
+         col=c(rgb(1,0,0,0.5),rgb(0,0,1,0.5),"green"), pt.cex=2, pch=15)
   
   
   ks_test_new_data = ks.test(new_data,mixture_marker_vector_test)
@@ -87,12 +91,6 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   
 }
 
-
-
-for(i in 1:length(markers_names)){
-  result = gamma_mixtures(2,i,5)
-  print(result)
-}
 
 
 

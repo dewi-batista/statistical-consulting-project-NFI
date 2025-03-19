@@ -31,7 +31,6 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   splitTrainTest = sample(c(TRUE, FALSE), length(mixture_marker_vector), replace=TRUE, prob=c(0.7,0.3))
   mixture_marker_vector_train = mixture_marker_vector[splitTrainTest]
   mixture_marker_vector_test = mixture_marker_vector[!splitTrainTest]
-  print(length(mixture_marker_vector_train))
   #### MODEL SELECTION ###
   
   # initialize best parameters
@@ -47,16 +46,19 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
       
     })
     
-    # check if it converged
     
+    #check if it converged
     if (isTRUE(output[2] == "WARNING! NOT CONVERGENT! ")==TRUE){
       print("no convergence")
       next
     }
     
+    
+    
+    
     # check if BIC is better
     
-    k = 3*n_components-1 # number of paramters to estimate 
+    k = 3*n_components-1 # number of paramters to estimate (minus one because lambdas must sum to 1)
     
     current_BIC = k*log(length(mixture_marker_vector_train)) - 2*gamma_mixtures_results$loglik
     if(current_BIC<best_BIC){
@@ -65,6 +67,7 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
       best_beta = gamma_mixtures_results$gamma.pars[2,]
       best_lambda = gamma_mixtures_results$lambda
       best_BIC = current_BIC
+      
     }
     
   }
@@ -90,6 +93,15 @@ gamma_mixtures = function(id_mixture,id_marker,max_components){
   return(c(ks_test_new_data$p.value,best_BIC))
   
 }
+
+for(i in 12:15){
+  result = gamma_mixtures(2,i,5)
+  print(result)
+}
+
+
+# NULL: If it does not converge
+# ERR: If the it outputs error that we need more components
 
 
 

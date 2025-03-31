@@ -8,7 +8,7 @@ Python 3.8 (or more recent) is recommended, along with `pip` — Python’s pack
 
 ## Programs:
 
-- `data_preprocessing.py`: Applies all pre-processing to `./data/mixtures.csv` detailed in `report.pdf`, e.g. replacing NaNs with 0s, one-hot encoding the fluids present and drops unneeded columns.
+- `data_preprocessing.py`: Applies all pre-processing to `./data/mixtures.csv` detailed in `report.pdf`, e.g. replacing NaNs with 0s, one-hot encoding the fluids present and dropping unneeded columns.
 - `gaussianMixtures.py`: All relevant documentation is contained inside the file.
 - `gammaMixtures.py`: All relevant documentation is contained inside the file.
 

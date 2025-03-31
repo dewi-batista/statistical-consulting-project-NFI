@@ -20,4 +20,4 @@ This repository contains implementations of Gamma and Gaussian mixture model app
 ## Other:
 - `./data/`: Contains the raw data as well as their pre-processed equivalents.
 - `./figures/`: Contains all relevant figures corresponding to our work. Has its own README for clarity.
-- `NFI_Mixtures_Results.xlsx` includes ...
+- `NFI_Mixtures_Results.xlsx` Contains the BIC of the selected model for each marker distribution and fluid pair. Also contains the p-values corresponding to the two-sample KS test performed for said models. In the third sheet of the file, `N` denotes that the selected Gaussian mixture was the better fit (than the Gamma mixture fit) and `G` denotes that the selected Gamma mixture was the better fit.

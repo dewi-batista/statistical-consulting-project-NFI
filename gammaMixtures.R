@@ -7,7 +7,8 @@ set.seed(42)
 
 # Get Data and Names of markers and mixtures
 
-data_mixtures = read.csv("C:\\Users\\rober\\Documents\\GitHub\\consulting_NFI\\mixtures.csv")
+# data_mixtures = read.csv("C:\\Users\\rober\\Documents\\GitHub\\consulting_NFI\\mixtures.csv")
+data_mixtures = read.csv("./data/mixtures.csv")
 mixture_names = unique(data_mixtures$X)
 markers_names = colnames(data_mixtures)[2:16]
 

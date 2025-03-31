@@ -4,7 +4,7 @@ This repository contains implementations of Gamma and Gaussian mixture model app
 ## Dependencies:
 Python 3.8 (or more recent) is recommended, along with `pip` — Python’s package installer. All dependencies are listed in `requirements.txt` and can be installed with `pip install -r requirements.txt`.
 
-**Note:** Ensure that the path of the console/environment used to execute `pip install -r requirements.txt` is that of the root of this repository.
+**Note:** To execute `pip install -r requirements.txt`, ensure that the path of your console/environment is that of the root of this repository.
 
 ## Programs:
 
@@ -12,7 +12,7 @@ Python 3.8 (or more recent) is recommended, along with `pip` — Python’s pack
 - `gaussianMixtures.py`: All relevant documentation is contained inside the file.
 - `gammaMixtures.py`: All relevant documentation is contained inside the file.
 
-**Note:** Ensure that the path of the console/environment used to run these programs is that of the root of this repository.
+**Note:** To run any of these programs, ensure that the path of your console/environment is that of the root of this repository.
 
 ## Other:
 - `./data/`: Contains the raw data as well as their pre-processed equivalents.

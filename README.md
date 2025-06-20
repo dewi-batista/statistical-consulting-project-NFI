@@ -1,6 +1,8 @@
 # Probabilistic Modelling of mRNA Electropherograms in Fluid Mixtures
 This repository contains implementations of Gamma and Gaussian mixture model approaches to fitting the distribution of genetic marker values conditioned on present fluid pairs.
 
+![pic_1](figures/gaussian/fits/Blood+Nasal.mucosa/ALAS2.png)
+
 ## Dependencies:
 **Python -** Python 3.10 (or more recent) is recommended, along with `pip` — Python’s package installer. All dependencies are listed in `requirements.txt` and can be installed with `pip install -r requirements.txt`.
 
